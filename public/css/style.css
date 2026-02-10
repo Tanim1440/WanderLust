@@ -1,0 +1,70 @@
+/* body{
+    background-color: aquamarine;
+} */
+.navbar{
+    height: 5rem;
+    background-color: white;
+} 
+
+.navIcon{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.f-social , .f-company{
+    margin-bottom: 10px;
+    /* padding-bottom: 1rem; */
+}
+
+.f-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-links a:hover{
+    text-decoration: underline;
+}
+
+.f-social{
+    font-size: 1.3rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.f-info{
+    text-align: center;
+    justify-content: center;
+    background-color: #ebebeb;
+    height: 7rem;
+}
+
+.f-company p{
+    justify-content: center;
+}
+
+.listing-link{
+    text-decoration: none;
+    color: #222222;
+}
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+}
+.card-body{
+    padding: 0px !important;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.1;
+    background-color: white;
+}
