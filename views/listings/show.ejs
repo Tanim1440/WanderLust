@@ -1,13 +1,29 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <h3><%= list.title %></h3>
-    <p><%= list.description %></p>
-    <p><a href="<%= list.image %>" target="_blank">img</a></p>
-    <p> &#2547; <%= list.price.toLocaleString("en-BD") %></p>
-    <p><%= list.location %></p>
-    <p><%= list.country %></p>
-    <a href="/listings/<%= list._id %>/edit">edit listing</a><br><br>
-    <form method="post" action="/listings/<%= list._id %>?_method=delete">
-        <button>delete this listing</button>
-    </form>
-</body>
+    <div class="row">
+        <div class="col-8 offset-2">
+
+            <body>
+                <h3 class="mt-2 mb-2">
+                   show listing details 
+                </h3>
+                <div class="card">
+                    <img src="<%= list.image %>>" class="card-img-top show-img mb-2" alt="listing_image" />
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b><%= list.title %></b><br>
+                            <%= list.description %> <br>
+                                &#2547; <%= list.price.toLocaleString("en-BD") %> <br>
+                                    <%= list.location %> <br>
+                                        <%= list.country %>
+                        </p>
+                    </div>
+                </div>
+                <div class="show-btn-container col-2 mb-3">
+                    <a class="btn btn-dark" href="/listings/<%= list._id %>/edit">edit</a>
+                <form method="post" action="/listings/<%= list._id %>?_method=delete">
+                    <button class="btn btn-dark castom-btn">delete</button>
+                </div>
+                </form>
+            </body>
+        </div>
+    </div>

@@ -1,6 +1,13 @@
-/* body{
-    background-color: aquamarine;
-} */
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+
 .navbar{
     height: 5rem;
     background-color: white;
@@ -67,4 +74,20 @@
 .card-img-overlay:hover{
     opacity: 0.1;
     background-color: white;
+}
+.castom-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.show-img{
+     width: 100%;
+    height: 300px;
+    object-fit: cover;
+    
+}
+
+.show-btn-container{
+    display: flex;
+    justify-content: space-between;
 }
