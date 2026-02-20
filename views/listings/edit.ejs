@@ -4,33 +4,59 @@
 
             <body>
                 <h2 class="mt-2">edit your listing</h2>
-                <form method="post" action="/listings/<%= list._id %>?_method=put">
+                <form method="post" action="/listings/<%= list._id %>?_method=put" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input name="listing[title]" type="text" value="<%= list.title %>" class="form-control">
+                        <input name="listing[title]" type="text" value="<%= list.title %>" class="form-control"
+                            required>
+                        <div class="valid-feedback">
+                            Title looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            title should be valid
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" type="text"
-                            class="form-control"><%= list.description %></textarea>
+                        <textarea name="listing[description]" type="text" class="form-control"
+                            required><%= list.description %></textarea>
+                        <div class="invalid-feedback">
+                            description should be valid
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input name="listing[image]" type="text" class="form-control" value="<%= list.image %>">
+                        <input name="listing[image]" type="text" class="form-control" value="<%= list.image %>"
+                            required>
+                        <div class="invalid-feedback">
+                            image url should be valid
+                        </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-4">
-                        <label for="price" class="form-label">Price</label>
-                        <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>">
-                    </div>
-                    <div class="mb-3 col-md-8">
-                        <label for="location" class="form-label">Location</label>
-                        <input name="listing[location]" type="text" class="form-control" value="<%= list.location %>">
-                    </div>
+                            <label for="price" class="form-label">Price</label>
+                            <input name="listing[price]" type="number" class="form-control" value="<%= list.price %>"
+                                required>
+                            <div class="invalid-feedback">
+                                price should be valid
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="location" class="form-label">Location</label>
+                            <input name="listing[location]" type="text" class="form-control"
+                                value="<%= list.location %>" required>
+                            <div class="invalid-feedback">
+                                location should be valid
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="country" class="form-label">Country</label>
-                        <input name="listing[country]" type="text" class="form-control" value="<%= list.country %>">
+                        <input name="listing[country]" type="text" class="form-control" value="<%= list.country %>"
+                            required>
+                        <div class="invalid-feedback">
+                            country should be valid
+                        </div>
                     </div>
                     <button class="btn btn-dark castom-btn mb-3">update list</button>
                 </form>
