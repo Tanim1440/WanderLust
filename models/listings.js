@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const review = require("./review");
 const schema=mongoose.Schema;
 
 const listSchema=new schema({
@@ -16,6 +17,12 @@ const listSchema=new schema({
     price:Number,
     location:String,
     country:String,
+    reviews:[
+        {
+            type:schema.Types.ObjectId,
+            ref:"review"
+        }
+    ]
 })
 
 let list=mongoose.model("list",listSchema);

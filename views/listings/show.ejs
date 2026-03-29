@@ -4,15 +4,14 @@
 
             <body>
                 <h3 class="mt-2 mb-2">
-                   show listing details 
+                    <%= list.title %>
                 </h3>
                 <div class="card">
                     <img src="<%= list.image %>>" class="card-img-top show-img mb-2" alt="listing_image" />
                     <div class="card-body">
                         <p class="card-text">
-                            <b><%= list.title %></b><br>
                             <%= list.description %> <br>
-                                &#2547; <%= list.price.toLocaleString("en-BD") %> <br>
+                                &#2547; <%= list.price %> <br>
                                     <%= list.location %> <br>
                                         <%= list.country %>
                         </p>
@@ -20,10 +19,23 @@
                 </div>
                 <div class="show-btn-container col-2 mb-3">
                     <a class="btn btn-dark" href="/listings/<%= list._id %>/edit">edit</a>
-                <form method="post" action="/listings/<%= list._id %>?_method=delete">
-                    <button class="btn btn-dark castom-btn">delete</button>
+                    <form method="post" action="/listings/<%= list._id %>?_method=delete">
+                        <button class="btn btn-dark castom-btn">delete</button>
                 </div>
                 </form>
             </body>
+            <hr>
+        </div>
+        <div class="col-8 offset-2 mb-3">
+            <form>
+            <h4>Leave a review</h4>
+            <label class="form-label"  for="rating">rating</label>
+            <input type="range" class="form-range" min="1" max="5" name="review[rating]">
+            <div class="mb-3">
+                <label for="comment" class="form-label">comment</label>
+            <textarea class="form-control" name="review[comment] "id="" rows="5" cols="50"></textarea>
+            </div>
+            <button class="btn btn-outline-dark mb-2">submit</button>
+        </form>
         </div>
     </div>
