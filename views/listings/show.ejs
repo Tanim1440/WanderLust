@@ -38,5 +38,22 @@
             </div>
             <button class="btn btn-outline-dark mb-2">submit</button>
         </form>
+
+        <hr>
+        <p><b>All reviews</b></p>
+        <div class="row">
+            <% for(lists of list.reviews){ %>
+                <div class="card border solid col-5 ms-3 pb-2">
+                   <div class="card-body">
+                    <h5 class="card-title">Tanim khan</h5>
+                    <p class="card-text"><%= lists.comment %></p>
+                    <p class="card-text"><%= lists.rating %> star</p>
+                   </div>
+                   <form method="post" action="/listings/<%= list._id %>/reviews/<%= lists._id %>?_method=delete">
+                    <button class="btn btn-sm btn-dark">delete</button>
+                   </form>
+                </div>
+                <% } %>
+        </div>
         </div>
     </div>

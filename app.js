@@ -90,7 +90,7 @@ app.put("/listings/:id",wrapAsync(async (req, res) => {
 //show route
 app.get("/listings/:id",wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let list = await lists.findById(id);
+    let list = await lists.findById(id).populate("reviews");
     res.render("listings/show.ejs", { list });
 }))
 //delete route
@@ -113,6 +113,13 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
     res.redirect(`/listings/${listing._id}`);
 }))
 
+//review delete post route
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
+    let {id,reviewId}=req.params;
+    await lists.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await reviews.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+}))
 app.get("/", (req, res) => {
     res.send("you are in root route");
 })
