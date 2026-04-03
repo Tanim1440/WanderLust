@@ -1,15 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const lists = require("./models/listings.js");
-const reviews=require("./models/review.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync=require("./utilits/wrapAsync.js")
 const ExpressError=require("./utilits/ExpressError.js")
-const {listingSchema,reviewSchema}=require("./schema.js");
 const listing=require("./routes/listing.js");
+const review=require("./routes/review.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -27,16 +24,7 @@ async function main() {
 
 
 
-const validateReview=(req,res,next)=>{
-    const {error}=reviewSchema.validate(req.body);
-    if(error){
-        let errmsg=error.details.map((el)=>el.message).join(",");
-        throw new ExpressError(400,errmsg);
-    }
-    else{
-        next();
-    }
-}
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -47,28 +35,9 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 //listing route
 app.use("/listings",listing);
+//review route
+app.use("/listings/:id/reviews",review);
 
-
-//review 
-//post route
-app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
-    let listing=await lists.findById(req.params.id);
-    let newReview= new reviews(req.body.review);
-
-    listing.reviews.push(newReview);
-    await listing.save();
-    await newReview.save();
-
-    res.redirect(`/listings/${listing._id}`);
-}))
-
-//review delete post route
-app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
-    let {id,reviewId}=req.params;
-    await lists.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-    await reviews.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}`);
-}))
 app.get("/", (req, res) => {
     res.send("you are in root route");
 })
