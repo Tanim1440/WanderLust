@@ -3,6 +3,23 @@ const app = express();
 const user=require("./routes/user.js");
 const admin=require("./routes/admin.js");
 const cookieParser =require("cookie-parser");
+const session=require("express-session");
+
+app.use(session({secret:"mysupersecretstring",resave:false,saveUninitialized:true}));
+
+app.get("/reqCount",(req,res)=>{
+    if(req.session.count){
+        req.session.count++;
+    }
+    else{
+        req.session.count=1;
+    }
+    res.send(`request send ${req.session.count} times`);
+})
+
+app.get("/test",(req,res)=>{
+    res.send("test successful");
+})
 
 //use user routes
 app.use("/user",user);
