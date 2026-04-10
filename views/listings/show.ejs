@@ -18,12 +18,14 @@
                         </p>
                     </div>
                 </div>
+            <% if(currUser && currUser._id.equals(list.owner._id)){ %>
                 <div class="show-btn-container col-2 mb-3">
                     <a class="btn btn-dark" href="/listings/<%= list._id %>/edit">edit</a>
                     <form method="post" action="/listings/<%= list._id %>?_method=delete">
                         <button class="btn btn-dark castom-btn">delete</button>
                 </div>
                 </form>
+            <% } %>
             </body>
             <hr>
         </div>
