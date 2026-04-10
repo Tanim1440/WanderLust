@@ -18,18 +18,19 @@
                         </p>
                     </div>
                 </div>
-            <% if(currUser && currUser._id.equals(list.owner._id)){ %>
+            <%  if(currUser && currUser._id.equals(list.owner._id)){ %>
                 <div class="show-btn-container col-2 mb-3">
                     <a class="btn btn-dark" href="/listings/<%= list._id %>/edit">edit</a>
                     <form method="post" action="/listings/<%= list._id %>?_method=delete">
                         <button class="btn btn-dark castom-btn">delete</button>
                 </div>
                 </form>
-            <% } %>
+                <% } %>
             </body>
             <hr>
         </div>
-        <div class="col-8 offset-2 mb-3">
+        <div class="col-8 offset-2 mb-3">       
+            <% if(currUser){ %>
             <form method="post" action="/listings/<%= list._id %>/reviews" novalidate class="needs-validation">
             <h4>Leave a review</h4>
             <label class="form-label"  for="rating">rating</label>
@@ -40,15 +41,15 @@
             <div class="invalid-feedback">comment required</div>
             </div>
             <button class="btn btn-outline-dark mb-2">submit</button>
+            <hr>
         </form>
-
-        <hr>
+         <% } %>
         <p><b>All reviews</b></p>
         <div class="row">
             <% for(lists of list.reviews){ %>
                 <div class="card border solid col-5 ms-3 pb-2">
                    <div class="card-body">
-                    <h5 class="card-title">Tanim khan</h5>
+                    <h5 class="card-title">@<%= lists.author.username %></h5>
                     <p class="card-text"><%= lists.comment %></p>
                     <p class="card-text"><%= lists.rating %> star</p>
                    </div>
