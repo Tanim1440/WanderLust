@@ -10,7 +10,7 @@
                     <img src="<%= list.image %>>" class="card-img-top show-img mb-2" alt="listing_image" />
                     <div class="card-body">
                         <p class="card-text">
-                           <p>owner: <i><b><%= list.owner.username %></b></i></p>
+                            <p>owner: <i><b><%= list.owner.username %></b></i></p> 
                             <%= list.description %> <br>
                                 &#2547; <%= list.price %> <br>
                                     <%= list.location %> <br>
@@ -18,7 +18,7 @@
                         </p>
                     </div>
                 </div>
-            <%  if(currUser && currUser._id.equals(list.owner._id)){ %>
+            <% if(currUser && currUser._id.equals(list.owner._id)){ %>
                 <div class="show-btn-container col-2 mb-3">
                     <a class="btn btn-dark" href="/listings/<%= list._id %>/edit">edit</a>
                     <form method="post" action="/listings/<%= list._id %>?_method=delete">
