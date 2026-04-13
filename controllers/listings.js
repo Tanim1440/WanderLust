@@ -10,9 +10,12 @@ module.exports.newListingFrom= (req, res) => {
 }
 
 module.exports.postNewListing=async (req, res, next) => {
+    let url=req.file.path;
+    let filename=req.file.filename;
     let newListing = req.body.listing;
     let addListing = new Listing(newListing);
     addListing.owner = req.user._id;
+    addListing.image={url,filename};
     await addListing.save();
     req.flash("success", "New listing added!");
     res.redirect("/listings");
