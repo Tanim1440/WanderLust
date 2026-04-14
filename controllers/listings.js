@@ -28,13 +28,21 @@ module.exports.editListing=async (req, res) => {
         req.flash("error", "Listing you found is not exist!!");
         return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { list });
+    let originalImageUrl=list.image.url;
+    originalImageUrl = originalImageUrl.replace("/upload","/upload/w_250");
+    res.render("listings/edit.ejs", { list, originalImageUrl });
 }
 
 module.exports.putEditListing=async (req, res) => {
     let { id } = req.params;
     let updatingListing = req.body.listing;
     let updatedListing = await Listing.findByIdAndUpdate(id, { ...updatingListing });
+    if(typeof req.file!=="undefined"){
+        let url=req.file.path;
+        let filename=req.file.filename;
+        updatedListing.image={url,filename};
+        await updatedListing.save();
+    }
     req.flash("success", "Listing edited");
     res.redirect(`/listings/${id}`);
 }
