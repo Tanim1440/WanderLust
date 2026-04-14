@@ -51,9 +51,9 @@ const sessionOptions={
     },
 };
 
-app.get("/", (req, res) => {
-    res.send("you are in root route");
-})
+// app.get("/", (req, res) => {
+//     res.send("you are in root route");
+// })
 
 app.use(session(sessionOptions));
 app.use(flash());
