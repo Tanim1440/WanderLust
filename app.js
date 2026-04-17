@@ -42,57 +42,57 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    crypto: {
-        secret: process.env.SECRET,
-    },
-    touchAfter: 24 * 3600,
-});
-
-store.on("error", (err) => {
-    console.log("ERROR IN MONGO SESSION STORE", err);
-});
-
-const sessionOptions = {
-    store,
-    secret: process.env.SECRET || "fallbacksecret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-    },
-};
-
-// const store=MongoStore.create({
-//     mongoUrl:dbUrl,
-//     crypto:{
-//         secret:process.env.SECRET,
+// const store = MongoStore.create({
+//     mongoUrl: dbUrl,
+//     crypto: {
+//         secret: process.env.SECRET,
 //     },
-//     touchAfter:24*3600,
+//     touchAfter: 24 * 3600,
 // });
 
-// store.on("error",(err)=>{
-//     console.log("ERROR IN MONGO SESSION STORE",err);
-// })
+// store.on("error", (err) => {
+//     console.log("ERROR IN MONGO SESSION STORE", err);
+// });
 
-// const sessionOptions={
+// const sessionOptions = {
 //     store,
-//     secret:process.env.SECRET,
-//     resave:false,
-//     saveUninitialized:false,
-//     cookie:{
-//         expires:Date.now()+7*24*60*60*1000,
-//         maxAge:7*24*60*60*1000,
-//         httpOnly:true,
-//         secure: process.env.NODE_ENV === "production"
+//     secret: process.env.SECRET || "fallbacksecret",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//         maxAge: 7 * 24 * 60 * 60 * 1000,
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV === "production",
 //     },
 // };
+
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*3600,
+});
+
+store.on("error",(err)=>{
+    console.log("ERROR IN MONGO SESSION STORE",err);
+})
+
+const sessionOptions={
+    store,
+    secret:process.env.SECRET,
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000,
+        httpOnly:true,
+        // secure: process.env.NODE_ENV === "production"
+    },
+};
 
 app.use(session(sessionOptions));
 app.use(flash());
